@@ -17,7 +17,7 @@
         <h1> Blog Cyber</h1>
         <div class="onglets">
             <a href="blog.php">Home</a>
-            <a href="creer_article.php">Créer un articles</a>
+            <a href="creer_article.php">Créer un article</a>
         </div>
     </nav>
 
