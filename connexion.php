@@ -1,16 +1,15 @@
-<?php
-    $link = mysqli_connect("127.0.0.1", "root", "l'ec'efmtnc'ePD33", "projet_cybermaco"); 
+<?php 
     include ("config.php");
     $mauvaislogin=false;
     $_SESSION['isConnected']=false;
 
     if(isset($_POST["pseudo"]) && isset($_POST["password"]))
     {
-
+        
         $pseudo = QuoteStr($_POST["pseudo"]);
         $password = QuoteStr($_POST["password"]);
         $password_hashed = hash('sha256', $password);
-
+        
 
         $sql="select count(*) from compte where pseudo=$pseudo and password='$password_hashed'";
         $nb=GetSQLValue($sql);
@@ -22,8 +21,8 @@
             $_SESSION['isConnected']=true; 
             $_SESSION['pseudo']=$pseudo;
             $_SESSION['id_compte']=$id_compte;
-            header("Location: liste.php");
-
+            header("Location: blog.php");
+            
         }
         else
         {
@@ -41,7 +40,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
+    <title>Conection</title>
     <link  href="css/style.css" rel="stylesheet">
 </head>
 <body>
@@ -50,12 +49,13 @@
 <h1> Merci de vous connecter </h1>
 
 <form method="POST">
+
     <input type="text" name="pseudo" placeholder="mets ton pseudo" > 
     <br>
     <input type="password" name="password">
-    <?php if($mauvaislogin==true){
-        echo 'password incorrect' .$password_hashed;
-     } ?>
+    <?php if($mauvaislogin==true){?>
+        erreur d'authentification
+    <?php } ?>
     <br>
     <a href="creer.php"> créer un nouveau compte </a>    
     <br>
