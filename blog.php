@@ -1,6 +1,7 @@
 <?php 
     include ("config.php");
     EstConnecte();
+
 ?>
 
 <!DOCTYPE html>
@@ -15,8 +16,8 @@
     <nav>
         <h1> Blog Cyber</h1>
         <div class="onglets">
-            <a href="#">Home</a>
-            <a href="#">Articles</a>
+            <a href="blog.php">Home</a>
+            <a href="creer_article.php">Créer un articles</a>
         </div>
     </nav>
 

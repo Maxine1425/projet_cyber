@@ -19,7 +19,7 @@
             //inserer nv compte
             $sql="insert into compte (id_compte, pseudo, password, mail) values (NULL, $pseudo, '$password_hashed', $mail)";
             ExecuteSQL($sql);
-            header("Location: blog.php");
+            htmlspecialchars (header("Location: blog.php"));
         } else 
         {
             $compte_existe = true;
@@ -35,7 +35,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Créer un compte</title>
-    <link  href="css/style.css" rel="stylesheet">
+    <link  href="style.css" rel="stylesheet">
 </head>
 <body>
 

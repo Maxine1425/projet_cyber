@@ -21,7 +21,7 @@
             $_SESSION['isConnected']=true; 
             $_SESSION['pseudo']=$pseudo;
             $_SESSION['id_compte']=$id_compte;
-            header("Location: blog.php");
+            htmlspecialchars (header("Location: blog.php"));
             
         }
         else

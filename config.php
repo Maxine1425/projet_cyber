@@ -102,7 +102,7 @@ if (!function_exists("QuoteStr")) {
 		{
 			// si je ne suis pas connecté, je vais à la page index.php, sinon ... rien
 			if ($_SESSION['isConnected']!=true){
-        header("location: connexion.php"); // modifier la page de redirection
+        htmlspecialchars (header("location: connexion.php")); // modifier la page de redirection
 			  exit;
       }
     			
