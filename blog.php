@@ -1,3 +1,8 @@
+<?php 
+    include ("config.php");
+    EstConnecte();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
