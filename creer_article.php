@@ -15,10 +15,8 @@
     $auteur=GetSQLValue("select pseudo from compte where id_compte ='$id_compte'");
     $sql = "insert into article (auteur,nom_article,contenu,image) values ('$auteur','$nom_article','$contenu','$image')";
 
-    $nb=GetSQLValue("select count(*) from article where nom_article=$nom_article");
 
-    if ($nb != 0)
-    
+    if (!empty($nom_article) && !empty($contenu)) 
     {
         ExecuteSQL($sql);
         
