@@ -5,7 +5,7 @@ session_start();
 $host='localhost';
 $user = "root";
 $password = "l'ec'efmtnc'ePD33";
-$base = "bddprojet";
+$base = "projet_cybermacols";
 
 $link = connexion_MySQLi_procedural($host, $user,$password,$base);
 
