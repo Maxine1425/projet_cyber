@@ -7,8 +7,8 @@
     if (isset($_POST["image"])) 
     {
         $image = QuoteStr($_POST["image"]);
-        $nom_article = QuoteStr($_POST["nom_article"])
-        $contenu = QuoteStr($_POST["contenu"])
+        $nom_article = QuoteStr($_POST["nom_article"]);
+        $contenu = QuoteStr($_POST["contenu"]);
     }
 
     $auteur=GetSQLValue("select pseudo from `compte` where id_compte ='$id_compte'");
@@ -29,8 +29,8 @@
     <nav>
         <h1>Articles</h1>
         <div class="onglets">
-            <a href="#">Home</a>
-            <a href="#">Articles</a>
+            <a href="blog.php">Home</a>
+            <a href="creer_article.php">Articles</a>
         </div>
     </nav>
     <form method="POST">
