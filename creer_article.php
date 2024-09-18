@@ -15,8 +15,11 @@
     $auteur=GetSQLValue("select pseudo from compte where id_compte ='$id_compte'");
     $sql = "insert into article (auteur,nom_article,contenu,image) values ('$auteur','$nom_article','$contenu','$image')";
 
-    $nb=GetSQLValue($sql);
-    if ($nb != 0){
+    $nb=GetSQLValue("select count(*) from article where nom_article=$nom_article");
+
+    if ($nb != 0)
+    
+    {
         ExecuteSQL($sql);
         
         //htmlspecialchars(header("location: blog.php"));
