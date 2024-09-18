@@ -14,7 +14,7 @@
     $auteur=GetSQLValue("select pseudo from `compte` where id_compte ='$id_compte'");
     $sql = "insert into `article` (`auteur`,`nom_article`) values ('$auteur','$nom_article','$contenu','$image')";
     ExecuteSQL($sql);
-    htmlspecialchars(header("location: blog.php")); 
+    //htmlspecialchars(header("location: blog.php")); 
 ?>
 
 <!DOCTYPE html>
