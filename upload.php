@@ -31,7 +31,7 @@
         $auteur=GetSQLValue("select pseudo from compte where id_compte ='$id_compte'");
         $img_blob = file_get_contents ($_FILES['name']['tmp_name']);
         $sql = "INSERT INTO article WHERE auteur ='$auteur' ('image') VALUES ("addslashes ($img_blob)") ";
-        $ret = mysql_query ($req) or die (mysql_error ());
+        $ret = mysql_query ($sql) or die (mysql_error ());
         return true;
         }
 ?>
