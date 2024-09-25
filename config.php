@@ -3,8 +3,8 @@ session_start();
 
 //changer les info de co, essayer de pas mettre en claire le mdp 
 $host='localhost';
-$user = "root";
-$password = "l'ec'efmtnc'ePD33";
+$user = $_ENV['USER_NAME'];
+$password = $_ENV['MDP_BDD'];
 $base = "projet_cybermaco";
 
 $link = connexion_MySQLi_procedural($host, $user,$password,$base);
