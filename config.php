@@ -1,5 +1,10 @@
 <?php
 session_start();
+require 'vendor/autoload.php'; // Charger les dépendances installées via Composer
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__); // Créer une instance Dotenv
+$dotenv->load(); // Charger les variables du fichier .env
+
 
 //changer les info de co, essayer de pas mettre en claire le mdp 
 $host='localhost';
