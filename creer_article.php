@@ -1,5 +1,5 @@
 <?php
-    include ("config.php");
+  /* include ("config.php");
     EstConnecte();
     $id_compte=$_SESSION['id_compte'];
     
@@ -14,7 +14,7 @@
         echo $sql;  // Débogage
         echo 'coucou';
         ExecuteSQL($sql);
-    }
+    }*/
  
 ?>
 
