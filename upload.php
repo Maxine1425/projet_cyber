@@ -40,7 +40,7 @@
             $img_type = $_FILES['image']['type'];
             $img_nom  = $_FILES['image']['name'];
             $auteur   = GetSQLValue("SELECT pseudo FROM compte WHERE id_compte ='$id_compte'");
-            $id_article   = GetSQLValue("SELECT id_article FROM article WHERE nom_article ='$nom_article'");
+            $id_article   = GetSQLValue("SELECT id_article FROM article WHERE nom_article =$nom_article");
             echo "$nom_article";
             
             // Correction : Utilisation de 'image' comme clé
