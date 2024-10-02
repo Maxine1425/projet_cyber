@@ -9,6 +9,7 @@
     $img_type  = '';
     $img_nom   = '';
     $taille_max = 500000;
+    $ret = is_uploaded_file($_FILES['image']['tmp_name']);
     
     if (isset($_POST["nom_article"])) 
     {
@@ -20,7 +21,6 @@
 
         echo $sql;  // Débogage
         echo 'coucou';
-        $ret = is_uploaded_file($_FILES['image']['tmp_name']);
         if (!$ret) 
         {
         echo "Problème de transfert";
