@@ -1,6 +1,7 @@
 <?php
-  /* include ("config.php");
+    include ("config.php");
     EstConnecte();
+/* 
     $id_compte=$_SESSION['id_compte'];
     
     if (isset($_POST["nom_article"])) 
