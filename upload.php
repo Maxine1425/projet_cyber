@@ -57,8 +57,10 @@
             
             // Utilisation de mysqli_query à la place de mysql_query
             $ret = mysqli_query($link, $sql) or die(mysqli_error($link));
-            return true;
+            //return true;
         }
+        header("Location: blog.php");
+        exit();
     }
     
    
