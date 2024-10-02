@@ -39,14 +39,18 @@
     <input type="text" name="nom_article" placeholder="Sans titre" required > 
     <br>
     <input type="text" name="contenu" placeholder="Corps de l'article" required>
+     <form action="upload.php" method="POST" enctype="multipart/form-data">
+        <label for="image">Choisissez une image :</label>
+        <input type="file" name="image">    
+    </form>
+    <br>
     <input type="submit" value="Valider">
     </form>
     <h2>Uploader une image</h2>
     
     <form action="upload.php" method="POST" enctype="multipart/form-data">
         <label for="image">Choisissez une image :</label>
-        <input type="file" name="image">
-        <button type="submit" name="upload">Uploader</button>
+        <input type="file" name="image">    
     </form>
 
 </body>
