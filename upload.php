@@ -11,6 +11,7 @@
     $taille_max = 500000;
     
     $ret = is_uploaded_file($_FILES['image']['tmp_name']);
+    echo "$ret"
     
     if (!$ret) {
         echo "Problème de transfert";
@@ -27,13 +28,14 @@
         $img_type = $_FILES['image']['type'];
         $img_nom  = $_FILES['image']['name'];
         $auteur   = GetSQLValue("SELECT pseudo FROM compte WHERE id_compte ='$id_compte'");
+        $id_article   = GetSQLValue("SELECT id_article FROM article WHERE auteur ='$auteur'");
         echo "$auteur"
         
         // Correction : Utilisation de 'image' comme clé
         $img_blob = file_get_contents($_FILES['image']['tmp_name']);
         
         // Correction de l'insertion avec 'mysqli_query'
-        $sql = "update article set image='" . addslashes($img_blob) . "' where auteur='$auteur'";
+        $sql = "update article set image='" . addslashes($img_blob) . "' where id_article='$id_article'";
         echo "$sql"
         
         // Utilisation de mysqli_query à la place de mysql_query
