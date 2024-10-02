@@ -10,7 +10,7 @@ $dotenv->load(); // Charger les variables du fichier .env
 $host='localhost';
 $user = $_ENV['USER_NAME'];
 $password = $_ENV['MDP_BDD'];
-$base = "projet_cybermaco";
+$base = "projet_cybermaco2";
 
 $link = connexion_MySQLi_procedural($host, $user,$password,$base);
 
