@@ -1,7 +1,8 @@
 <?php
     include ("config.php");
     EstConnecte();
-    $id_compte = $_SESSION['id_compte'];
+    $id_article = $_SESSION['id_article'];
+   // $id_compte = $_SESSION['id_compte'];
     $ret       = false;
     $img_blob  = '';
     $img_taille = 0;
@@ -25,13 +26,13 @@
 
         $img_type = $_FILES['image']['type'];
         $img_nom  = $_FILES['image']['name'];
-        $auteur   = GetSQLValue("SELECT pseudo FROM compte WHERE id_compte ='$id_compte'");
+        //$auteur   = GetSQLValue("SELECT pseudo FROM compte WHERE id_compte ='$id_compte'");
         
         // Correction : Utilisation de 'image' comme clé
         $img_blob = file_get_contents($_FILES['image']['tmp_name']);
         
         // Correction de l'insertion avec 'mysqli_query'
-        $sql = "INSERT INTO article (auteur, image) VALUES ('$auteur', '" . addslashes($img_blob) . "')";
+        $sql = "update article set image='" . addslashes($img_blob) . "' where id_article='$id_article'";
         
         // Utilisation de mysqli_query à la place de mysql_query
         $ret = mysqli_query($link, $sql) or die(mysqli_error($link));
