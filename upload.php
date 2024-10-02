@@ -16,19 +16,15 @@
         $nom_article = QuoteStr($_POST["nom_article"]);
         $contenu = QuoteStr($_POST["contenu"]);
         $auteur=GetSQLValue("select pseudo from compte where id_compte ='$id_compte'");
-        $sql = "insert into article (auteur, nom_article, contenu) values ('$auteur', $nom_article, $contenu)";
+        $sql1 = "insert into article (auteur, nom_article, contenu) values ('$auteur', $nom_article, $contenu)";
 
-        echo $sql;  // Débogage
+        echo $sql1;  // Débogage
         echo 'coucou';
-        ExecuteSQL($sql);
-    }
-    
-    $ret = is_uploaded_file($_FILES['image']['tmp_name']);
-    
-    if (!$ret) {
+        $ret = is_uploaded_file($_FILES['image']['tmp_name']);
+        if (!$ret) {
         echo "Problème de transfert";
         return false;
-    } else {
+        } else {
         // Le fichier a bien été reçu
         $img_taille = $_FILES['image']['size'];
         
@@ -52,7 +48,10 @@
         
         // Utilisation de mysqli_query à la place de mysql_query
         $ret = mysqli_query($link, $sql) or die(mysqli_error($link));
-        
         return true;
+        }
+        ExecuteSQL($sql1);
     }
+    
+   
 ?>
