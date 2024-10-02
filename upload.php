@@ -9,6 +9,7 @@
     $img_type  = '';
     $img_nom   = '';
     $taille_max = 500000;
+    $nom_article = QuoteStr($_POST["nom_article"]);
     
     $ret = is_uploaded_file($_FILES['image']['tmp_name']);
     
@@ -28,7 +29,7 @@
         $img_nom  = $_FILES['image']['name'];
         $auteur   = GetSQLValue("SELECT pseudo FROM compte WHERE id_compte ='$id_compte'");
         $id_article   = GetSQLValue("SELECT id_article FROM article WHERE nom_article ='$nom_article'");
-        echo "$id_article";
+        echo "$nom_article";
         
         // Correction : Utilisation de 'image' comme clé
         $img_blob = file_get_contents($_FILES['image']['tmp_name']);
