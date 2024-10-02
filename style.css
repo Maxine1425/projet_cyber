@@ -1,4 +1,4 @@
-body{
+body {
     margin: 10px 80px;
 }
 
@@ -8,44 +8,62 @@ nav {
     justify-content: space-between;
 }
 
-nav h1{
+nav h1 {
     font-size: 30px;
 }
 
-nav .onglets{
+nav .onglets {
     margin-top: 35px;
 }
 
-nav .onglets a{
+nav .onglets a {
     text-decoration: none;
     color: #7f7e7e;
     margin-right: 10px;
 }
 
-.articles{
+.articles {
     margin-top: 30px;
 }
 
-.articles .article{
+.articles .article {
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 30px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
 }
 
-.articles .article .left img{
-    height: 300px;
-    width: 500px;
+/* Ajustement de la taille de l'image */
+.articles .article .left img {
+    max-width: 100%;    /* L'image ne dépassera pas la taille du conteneur */
+    height: auto;       /* Conserver les proportions de l'image */
+    object-fit: cover;  /* Assure que l'image est bien coupée si nécessaire */
+    max-height: 300px;  /* Limite la hauteur maximale à 300px */
+    width: 100%;        /* L'image occupera 100% de la largeur du conteneur */
 }
 
-.articles .article .right{
-    max-width: 50%;
+.articles .article .right {
+    flex: 1;                  /* Laisse la partie texte prendre le reste de l'espace */
     margin-left: 40px;
 }
 
-.articles .article .right p.date{
+.articles .article .right p.date {
     color: #7f7e7e;
 }
 
-.articles .article .right p.description{
+.articles .article .right p.description {
     color: #2d2d2d;
+}
+
+.articles .article .right h1 {
+    font-size: 24px;
+    color: #000;
+}
+
+.articles .article .right p.auteur {
+    font-weight: bold;
+    color: #444;
 }
