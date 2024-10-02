@@ -17,9 +17,14 @@
         $nom_article = QuoteStr($_POST["nom_article"]);
         $contenu = QuoteStr($_POST["contenu"]);
         $auteur=GetSQLValue("select pseudo from compte where id_compte ='$id_compte'");
-        $sql = "insert into article (auteur, nom_article, contenu) values ('$auteur', $nom_article, $contenu)";
-        ExecuteSQL($sql);
-        echo $sql;  // Débogage
+        $same_nom_article=GetSQLValue("select count(*) from `article` where nom_article=$nom_article");
+
+        if($same_nom_article==0)
+        {
+            $sql = "insert into article (auteur, nom_article, contenu) values ('$auteur', $nom_article, $contenu)";
+            ExecuteSQL($sql);
+            echo $sql;  // Débogage
+        }
         echo 'coucou';
         if (!$ret) 
         {
