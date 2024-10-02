@@ -35,23 +35,26 @@
             <a href="creer_article.php">Créer un article</a>
         </div>
     </nav>
-    <form method="POST">
+    <form action="upload.php" method="POST" enctype="multipart/form-data">
     <input type="text" name="nom_article" placeholder="Sans titre" required > 
     <br>
     <input type="text" name="contenu" placeholder="Corps de l'article" required>
-     <form action="upload.php" method="POST" enctype="multipart/form-data">
+    <!-- <form action="upload.php" method="POST" enctype="multipart/form-data">
         <label for="image">Choisissez une image :</label>
         <input type="file" name="image">    
-    </form>
+    </form>-->
+    <br>
+    <label for="image">Choisissez une image :</label>
+    <input type="file" name="image"> 
     <br>
     <input type="submit" value="Valider">
     </form>
     <h2>Uploader une image</h2>
     
-    <form action="upload.php" method="POST" enctype="multipart/form-data">
+   <!-- <form action="upload.php" method="POST" enctype="multipart/form-data">
         <label for="image">Choisissez une image :</label>
         <input type="file" name="image">    
-    </form>
+    </form>-->
 
 </body>
 </html>
