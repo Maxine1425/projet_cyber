@@ -5,11 +5,11 @@
     
     if (isset($_POST["nom_article"])) 
     {
-        $image = QuoteStr($_POST["auteur"]);
+        $image = QuoteStr($_POST["image"]);
         $nom_article = QuoteStr($_POST["nom_article"]);
         $contenu = QuoteStr($_POST["contenu"]);
         $auteur=GetSQLValue("select pseudo from compte where id_compte ='$id_compte'");
-        $sql = "insert into article (auteur, nom_article, contenu) values ('$auteur', $nom_article, $contenu, $image)";
+        $sql = "insert into article (auteur, nom_article, contenu) values ('$auteur', $nom_article, $contenu)";
 
         echo $sql;  // Débogage
         echo 'coucou';
