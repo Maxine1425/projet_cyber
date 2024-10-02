@@ -25,6 +25,10 @@
             ExecuteSQL($sql);
             echo $sql;  // Débogage
         }
+        else
+        {
+            echo "Titre déjà utilisé";
+        }
         echo 'coucou';
         if (!$ret) 
         {
