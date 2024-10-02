@@ -8,7 +8,7 @@
     $img_taille = 0;
     $img_type  = '';
     $img_nom   = '';
-    $taille_max = 500000;
+    $taille_max = 50000;
     $ret = is_uploaded_file($_FILES['image']['tmp_name']);
     
     if (isset($_POST["nom_article"])) 
