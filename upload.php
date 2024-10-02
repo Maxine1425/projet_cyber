@@ -18,7 +18,7 @@
         $contenu = QuoteStr($_POST["contenu"]);
         $auteur=GetSQLValue("select pseudo from compte where id_compte ='$id_compte'");
         $sql = "insert into article (auteur, nom_article, contenu) values ('$auteur', $nom_article, $contenu)";
-
+        ExecuteSQL($sql);
         echo $sql;  // Débogage
         echo 'coucou';
         if (!$ret) 
@@ -47,14 +47,13 @@
             $img_blob = file_get_contents($_FILES['image']['tmp_name']);
             
             // Correction de l'insertion avec 'mysqli_query'
-            $sql = "update article set image='" . addslashes($img_blob) . "' where auteur='$auteur'";
+            $sql = "update article set image='" . addslashes($img_blob) . "' where id_article='$id_article'";
         
             
             // Utilisation de mysqli_query à la place de mysql_query
             $ret = mysqli_query($link, $sql) or die(mysqli_error($link));
             return true;
         }
-        ExecuteSQL($sql);
     }
     
    
