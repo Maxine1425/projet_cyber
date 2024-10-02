@@ -5,7 +5,7 @@
     
     if (isset($_POST["nom_article"])) 
     {
-        $image = QuoteStr($_POST["image"]);
+        //$image = QuoteStr($_POST["image"]);
         $nom_article = QuoteStr($_POST["nom_article"]);
         $contenu = QuoteStr($_POST["contenu"]);
         $auteur=GetSQLValue("select pseudo from compte where id_compte ='$id_compte'");
