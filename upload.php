@@ -1,7 +1,7 @@
 <?php
     include ("config.php");
     EstConnecte();
-    //$id_article = $_SESSION['id_article'];
+    
     $id_compte = $_SESSION['id_compte'];
     $ret       = false;
     $img_blob  = '';
@@ -9,7 +9,19 @@
     $img_type  = '';
     $img_nom   = '';
     $taille_max = 500000;
-    $nom_article = QuoteStr($_POST["nom_article"]);
+    
+    if (isset($_POST["nom_article"])) 
+    {
+        //$image = QuoteStr($_POST["image"]);
+        $nom_article = QuoteStr($_POST["nom_article"]);
+        $contenu = QuoteStr($_POST["contenu"]);
+        $auteur=GetSQLValue("select pseudo from compte where id_compte ='$id_compte'");
+        $sql = "insert into article (auteur, nom_article, contenu) values ('$auteur', $nom_article, $contenu)";
+
+        echo $sql;  // Débogage
+        echo 'coucou';
+        ExecuteSQL($sql);
+    }
     
     $ret = is_uploaded_file($_FILES['image']['tmp_name']);
     
