@@ -50,7 +50,6 @@
     <br>
     <input type="submit" value="Valider">
     </form>
-    <h2>Uploader une image</h2>
     
    <!-- <form action="upload.php" method="POST" enctype="multipart/form-data">
         <label for="image">Choisissez une image :</label>
