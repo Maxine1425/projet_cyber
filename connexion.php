@@ -1,68 +1,62 @@
 <?php 
-    include ("config.php");
-    $mauvaislogin=false;
-    $_SESSION['isConnected']=false;
+require 'config.php';
+//session_start(); // Démarre la session mais deja mi dans config
 
-    if(isset($_POST["pseudo"]) && isset($_POST["password"]))
-    {
-        
-        $pseudo = QuoteStr($_POST["pseudo"]);
-        $password = QuoteStr($_POST["password"]);
-        $password_hashed = hash('sha256', $password);
-        
+$mauvaislogin = false;
+$_SESSION['isConnected'] = false;
 
-        $sql="select count(*) from compte where pseudo=$pseudo and password='$password_hashed'";
-        $nb=GetSQLValue($sql);
-        $id_compte=GetSQLValue("select id_compte from compte where pseudo=$pseudo ");
+if (isset($_POST["pseudo"]) && isset($_POST["password"])) {
+    
+    $pseudo = QuoteStr($_POST["pseudo"]);
+    $password = QuoteStr($_POST["password"]);
+    $password_hashed = hash('sha256', $password);
 
+    // Vérifie si le pseudo et le mot de passe sont corrects
+    $sql = "SELECT COUNT(*) FROM compte WHERE pseudo=$pseudo AND password='$password_hashed'";
+    $nb = GetSQLValue($sql);
 
-        if ($nb != 0)
-        {
-            $_SESSION['isConnected']=true; 
-            $_SESSION['pseudo']=$pseudo;
-            $_SESSION['id_compte']=$id_compte;
-            htmlspecialchars (header("Location: blog.php"));
-            
-        }
-        else
-        {
-            $mauvaislogin=true;
-        }
+    // Récupère l'ID du compte associé
+    $id_compte = GetSQLValue("SELECT id_compte FROM compte WHERE pseudo=$pseudo");
 
+    if ($nb != 0) {
+        // Définit les variables de session
+        $_SESSION['isConnected'] = true;
+        $_SESSION['pseudo'] = $pseudo;
+        $_SESSION['user_id'] = $id_compte; // Définit la session user_id pour la cohérence
+
+        header("Location: blog.php"); // Redirige vers la page du blog
+        exit();
+    } else {
+        $mauvaislogin = true;
     }
-
+}
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-   
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conection</title>
-    <link  href="style.css" rel="stylesheet">
+    <title>Connexion</title>
+    <link href="style.css" rel="stylesheet">
 </head>
 <body>
+    <h1>Merci de vous connecter</h1>
 
-
-<h1> Merci de vous connecter </h1>
-
-<form method="POST">
-
-    <input type="text" name="pseudo" placeholder="mets ton pseudo" > 
-    <br>
-    <input type="password" name="password">
-    <?php if($mauvaislogin==true){?>
-        erreur d'authentification
-    <?php } ?>
-    <br>
-    <a href="creer.php"> créer un nouveau compte </a>    
-    <br>
-    <input type="submit" value="Connexion">
-
-</form>
-
+    <form method="POST">
+        <input type="text" name="pseudo" placeholder="mets ton pseudo" required> 
+        <br>
+        <input type="password" name="password" placeholder="Mot de passe" required>
+        <br>
+        <?php if ($mauvaislogin) { ?>
+            <p style="color: red;">Erreur d'authentification</p>
+        <?php } ?>
+        <a href="creer.php">Créer un nouveau compte</a>    
+        <br>
+        <input type="submit" value="Connexion">
+    </form>
 </body>
 </html>
-<?php mysqli_close($link) ?>
+
+<?php mysqli_close($link); ?>
