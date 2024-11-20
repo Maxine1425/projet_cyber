@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'vendor/autoload.php'; // Charger les dépendances installées via Composer
+//require 'vendor/autoload.php'; // Charger les dépendances installées via Composer
 
 /*
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__); // Créer une instance Dotenv
