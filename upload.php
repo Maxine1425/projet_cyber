@@ -65,9 +65,8 @@ if (isset($_POST["nom_article"]))
                 $fileContent = file_get_contents($fileTmpPath);
 
                 // Préparer la requête
-                $sql = prepare("INSERT INTO pdf (name, file) VALUES (?, ?)");
-                mysqli_bind_param($sql,"sb", $fileName, $fileContent);
-                ExecuteSQL($sql);}}}
+                $sql = "UPDATE article SET pdf='" . addslashes($fileContent) . "' WHERE id_article=$id_article";
+                $ret = mysqli_query($link, $sql) or die("Erreur lors de l'ajout du pdf: " . mysqli_error($link));}}}
                 
               /*  if (ExecuteSQL($sql)) {
                     echo "Fichier téléchargé et enregistré avec succès !";
