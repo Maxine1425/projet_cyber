@@ -30,7 +30,7 @@
     <input type="file" name="image"> 
     <br>
     <label for="file">Choisissez un fichier PDF :</label>
-    <input type="file" name="file" id="file" accept="application/pdf" required>
+    <input type="file" name="pdf" accept="application/pdf" required>
     </br>
     <input type="submit" value="Valider">
     </form>
