@@ -9,8 +9,8 @@ $dotenv->load(); // Charger les variables du fichier .env
 
 //changer les info de co, essayer de pas mettre en claire le mdp 
 $host='localhost';
-$user = $_ENV['USER_NAME'];
-$password = $_ENV['MDP_BDD'];
+$user = $_SERVER['USER_NAME'];
+$password = $_SERVER['MDP_BDD'];
 //$user = getenv('USER_NAME');
 //$password = getenv('MDP_BDD');
 $base = "projet_cybermaco";
