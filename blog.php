@@ -6,17 +6,17 @@ EstConnecte();
 $sql = "SELECT * FROM article ORDER BY date_creation DESC";
 $result = mysqli_query($link, $sql);
 
-$pdf = "SELECT id, name FROM pdf_files";
+$pdf = "SELECT id_pdf, name FROM pdf";
 $result2 = mysqli_query($link, $pdf);
 ?>
 
 <?php
 
-if (isset($_GET['id'])) {
-    $id = intval($_GET['id']);
+if (isset($_GET['id_pdf'])) {
+    $id = intval($_GET['id_pdf']);
 
     // Récupérer le fichier
-    $sql_pdf = prepare("SELECT name, file FROM pdf_files WHERE id = ?");
+    $sql_pdf = prepare("SELECT name, file FROM pdf WHERE id_pdf = ?");
     mysqli_bind_param($sql_pdf,"i", $id);
     ExecuteSQL($sql_pdf);
     mysqli_bind_result($sql_pdf,$name, $file);
@@ -99,16 +99,16 @@ if (isset($_GET['id'])) {
                 </div>
                 <div class="liste des pdf">
                     <?php
-                        if ($result2 > 0) 
+                        /*if ($result2 > 0) 
                         {
                             while ($row = mysqli_fetch_assoc($result2)) {
-                                echo '<li><a href="download.php?id=' . $row['id'] . '">' . htmlspecialchars($row['name']) . '</a></li>';
+                                echo '<li><a href="download.php?id=' . $row['id_pdf'] . '">' . htmlspecialchars($row['name']) . '</a></li>';
                             }
                         } 
                         else 
                         {
                             echo "<li>Aucun fichier trouvé.</li>";
-                        }
+                        }*/
                     ?>
                 </div>
             </div>
