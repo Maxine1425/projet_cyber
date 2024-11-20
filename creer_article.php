@@ -29,10 +29,8 @@
     <label for="image">Choisissez une image :</label>
     <input type="file" name="image"> 
     <br>
-    <form action="ajouter_pdf.php" method="POST" enctype="multipart/form-data">
     <label for="file">Choisissez un fichier PDF :</label>
     <input type="file" name="file" id="file" accept="application/pdf" required>
-    </form>
     </br>
     <input type="submit" value="Valider">
     </form>
