@@ -83,7 +83,7 @@ if (isset($_POST["nom_article"]))
         }*/
    // header("Location: blog.php");
   //  exit();
-}
+
 ?>
 
 
