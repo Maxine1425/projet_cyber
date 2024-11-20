@@ -12,7 +12,7 @@ $result2 = mysqli_query($link, $pdf);
 
 <?php
 
-if (isset($_GET['id_article'])) {
+/*if (isset($_GET['id_article'])) {
     $id = intval($_GET['id_article']);
 
     // Récupérer le fichier
@@ -30,7 +30,7 @@ if (isset($_GET['id_article'])) {
     } else {
         echo "Fichier non trouvé.";
     }
-}
+}*/
 ?>
 
 
