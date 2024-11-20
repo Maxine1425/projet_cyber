@@ -81,7 +81,7 @@ if (isset($_POST["nom_article"]))
         } else {
             echo "Erreur lors de l'import du fichier.";
         }*/
-   // header("Location: blog.php");
+    header("Location: blog.php");
   //  exit();
 
 ?>
