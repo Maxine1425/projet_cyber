@@ -16,11 +16,11 @@ if (isset($_GET['id'])) {
     $id = intval($_GET['id']);
 
     // Récupérer le fichier
-    $stmt = $conn->prepare("SELECT name, file FROM pdf_files WHERE id = ?");
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $stmt->bind_result($name, $file);
-    $stmt->fetch();
+    $sql_pdf = prepare("SELECT name, file FROM pdf_files WHERE id = ?");
+    mysqli_bind_param($sql_pdf,"i", $id);
+    ExecuteSQL($sql_pdf);
+    mysqli_bind_result($sql_pdf,$name, $file);
+    mysqli_fetch($sql_pdf);
 
     if ($file) {
         // Envoyer les en-têtes pour télécharger le fichier
@@ -99,7 +99,7 @@ if (isset($_GET['id'])) {
                 </div>
                 <div class="liste des pdf">
                     <?php
-                        if ($result2->num_rows > 0) 
+                        if ($result2 > 0) 
                         {
                             while ($row = mysqli_fetch_assoc($result2)) {
                                 echo '<li><a href="download.php?id=' . $row['id'] . '">' . htmlspecialchars($row['name']) . '</a></li>';
