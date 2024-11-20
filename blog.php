@@ -12,21 +12,21 @@ $result2 = mysqli_query($link, $pdf);
 
 <?php
 
-if (isset($_GET['id_pdf'])) {
-    $id = intval($_GET['id_pdf']);
+if (isset($_GET['id_article'])) {
+    $id = intval($_GET['id_article']);
 
     // Récupérer le fichier
-    $sql_pdf = prepare("SELECT name, file FROM pdf WHERE id_pdf = ?");
+    $sql_pdf = prepare("SELECT pdf FROM article WHERE id_article = ?");
     mysqli_bind_param($sql_pdf,"i", $id);
-    ExecuteSQL($sql_pdf);
-    mysqli_bind_result($sql_pdf,$name, $file);
+    GetSQLValue($sql_pdf);
+    mysqli_bind_result($sql_pdf);
     mysqli_fetch($sql_pdf);
 
     if ($file) {
         // Envoyer les en-têtes pour télécharger le fichier
         header('Content-Type: application/pdf');
-        header('Content-Disposition: attachment; filename="' . $name . '"');
-        echo $file;
+        //header('Content-Disposition: attachment; filename="' . $name . '"');
+        echo $sql_pdf;
     } else {
         echo "Fichier non trouvé.";
     }
