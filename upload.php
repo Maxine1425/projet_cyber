@@ -69,7 +69,7 @@ if (isset($_POST["nom_article"]))
                 mysqli_bind_param($sql,"sb", $fileName, $fileContent);
                 ExecuteSQL($sql)
                 
-                if (ExecuteSQL($sql)) {
+              /*  if (ExecuteSQL($sql)) {
                     echo "Fichier téléchargé et enregistré avec succès !";
                 } else {
                     echo "Erreur lors de l'enregistrement du fichier : " . $sql->error;
@@ -80,7 +80,7 @@ if (isset($_POST["nom_article"]))
             }
         } else {
             echo "Erreur lors de l'import du fichier.";
-        }
+        }*/
     header("Location: blog.php");
     exit();
 }
