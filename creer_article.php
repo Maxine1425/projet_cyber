@@ -31,6 +31,12 @@
     <br>
     <input type="submit" value="Valider">
     </form>
+    <br>
+    <form action="ajouter_pdf.php" method="POST" enctype="multipart/form-data">
+        <label for="file">Choisissez un fichier PDF :</label>
+        <input type="file" name="file" id="file" accept="application/pdf" required>
+        <button type="submit" name="importer">importer</button>
+    </form>
 </body>
 </html>
 <?php mysqli_close($link) ?>
