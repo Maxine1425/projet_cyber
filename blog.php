@@ -97,20 +97,6 @@ $result2 = mysqli_query($link, $pdf);*/
                     }
                     ?>
                 </div>
-                <div class="liste des pdf">
-                    <?php
-                        /*if ($result2 > 0) 
-                        {
-                            while ($row = mysqli_fetch_assoc($result2)) {
-                                echo '<li><a href="download.php?id=' . $row['id_pdf'] . '">' . htmlspecialchars($row['name']) . '</a></li>';
-                            }
-                        } 
-                        else 
-                        {
-                            echo "<li>Aucun fichier trouvé.</li>";
-                        }*/
-                    ?>
-                </div>
             </div>
         </div>
         <?php
