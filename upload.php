@@ -67,7 +67,7 @@ if (isset($_POST["nom_article"]))
                 // Préparer la requête
                 $sql = prepare("INSERT INTO pdf (name, file) VALUES (?, ?)");
                 mysqli_bind_param($sql,"sb", $fileName, $fileContent);
-                ExecuteSQL($sql)
+                ExecuteSQL($sql)}}
                 
               /*  if (ExecuteSQL($sql)) {
                     echo "Fichier téléchargé et enregistré avec succès !";
