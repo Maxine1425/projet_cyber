@@ -6,8 +6,8 @@ EstConnecte();
 $sql = "SELECT * FROM article ORDER BY date_creation DESC";
 $result = mysqli_query($link, $sql);
 
-$pdf = "SELECT id_pdf, name FROM pdf";
-$result2 = mysqli_query($link, $pdf);
+/*$pdf = "SELECT id_pdf, name FROM pdf";
+$result2 = mysqli_query($link, $pdf);*/
 ?>
 
 <?php
