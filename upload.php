@@ -3,7 +3,7 @@ require 'config.php';
 EstConnecte();
 
 $id_compte = $_SESSION['user_id']; // ID du compte de l'utilisateur connecté
-$taille_max = 50000; // Taille max du fichier image en octets
+$taille_max = 100000; // Taille max du fichier image en octets
 $types_valides = ['image/jpeg', 'image/png', 'image/gif']; // Types de fichiers acceptés pour les images
 
 if (isset($_POST["nom_article"])) {
