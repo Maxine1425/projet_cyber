@@ -6,7 +6,7 @@ EstConnecte();
 $id_compte = $_SESSION['user_id']; // ID du compte de l'utilisateur connecté
 $taille_max = 65536; // Taille max du fichier image en octets
 $types_valides = ['image/jpeg', 'image/png', 'image/gif']; // Types de fichiers acceptés pour les images
-$taille_max_zip = 10000000; // Taille max du fichier ZIP en octets (10MB)
+$taille_max_zip = 400000; // Taille max du fichier ZIP en octets (10MB)
 $types_valides_zip = ['application/zip', 'application/x-zip-compressed']; // Types valides pour les fichiers ZIP
 
 if (isset($_POST["nom_article"])) {
