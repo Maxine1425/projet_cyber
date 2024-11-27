@@ -58,8 +58,7 @@ $result = mysqli_query($link, $sql);
                         $tempPdfPath = '/var/www/html/pdfs/tempfile_' . $article['id_article'] . '.pdf';
                         file_put_contents($tempPdfPath, $pdfContent);
                     ?>
-                    <embed src="<?php echo $tempPdfPath; ?>" type="application/pdf" width="100%" height="600px" />
-                <?php else: ?>
+                    <embed src="/pdfs/tempfile_<?php echo $article['id_article']; ?>.pdf" type="application/pdf" width="100%" height="600px" />
                     <p>Aucun PDF disponible pour cet article.</p>
                 <?php endif; ?>
 
