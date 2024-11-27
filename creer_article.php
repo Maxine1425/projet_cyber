@@ -22,19 +22,21 @@
         </div>
     </nav>
     <form action="upload.php" method="POST" enctype="multipart/form-data">
-    <input type="text" name="nom_article" placeholder="Sans titre" required > 
+        <input type="text" name="nom_article" placeholder="Sans titre" required > 
     <br>
-    <input type="text" name="contenu" placeholder="Corps de l'article" required>
+        <input type="text" name="contenu" placeholder="Corps de l'article" required>
     <br>
-    <label for="image">Choisissez une image :</label>
-    <input type="file" name="image"> 
+        <label for="image">Choisissez une image :</label>
+        <input type="file" name="image"> 
     <br>
-    <label for="file">Choisissez un fichier PDF :</label>
-    <input type="file" name="pdf" accept="application/pdf" required>
+        <label for="pdf_file">Choisir un fichier PDF :</label>
+        <input type="file" name="pdf_file" id="pdf_file" accept="application/pdf" required>
     </br>
-    <input type="submit" value="Valider">
+        <input type="submit" value="Valider">
     </form>
     <br>
 </body>
 </html>
 <?php mysqli_close($link) ?>
+
+

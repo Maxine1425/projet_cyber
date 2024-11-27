@@ -55,7 +55,7 @@ if (isset($_POST["nom_article"]))
         $sql = "UPDATE article SET image='" . addslashes($img_blob) . "' WHERE id_article=$id_article";
         $ret = mysqli_query($link, $sql) or die("Erreur lors de l'ajout de l'image : " . mysqli_error($link));
     }
-    if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
+    /*if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
             $fileName = $_FILES['file']['name'];
             $fileTmpPath = $_FILES['file']['tmp_name'];
             $fileType = $_FILES['file']['type'];
@@ -68,7 +68,7 @@ if (isset($_POST["nom_article"]))
                 $sql = "UPDATE article SET pdf='" . addslashes($fileContent) . "' WHERE id_article=$id_article";
                 $ret = mysqli_query($link, $sql) or die("Erreur lors de l'ajout du pdf: " . mysqli_error($link));}}}
                 
-              /*  if (ExecuteSQL($sql)) {
+               if (ExecuteSQL($sql)) {
                     echo "Fichier téléchargé et enregistré avec succès !";
                 } else {
                     echo "Erreur lors de l'enregistrement du fichier : " . $sql->error;
@@ -80,8 +80,23 @@ if (isset($_POST["nom_article"]))
         } else {
             echo "Erreur lors de l'import du fichier.";
         }*/
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['pdf_file'])) {
+            $file = $_FILES['pdf_file'];
+        
+            // Vérifiez si le fichier est bien un PDF
+            if ($file['type'] === 'application/pdf') {
+                $fileName = $file['name'];
+                $fileData = file_get_contents($file['tmp_name']);
+                $fileBase64 = base64_encode($fileData);
+        
+                // Insérez le fichier dans la base de données
+                $sql_pdf = "INSERT INTO article (file_name, file_data) VALUES ($fileName, $fileData)";
+                ExecuteSQL($sql_pdf);
+            }
+        }
     header("Location: blog.php");
   //  exit();
+    }
 
 ?>
 
@@ -106,3 +121,4 @@ if (isset($_POST["nom_article"]))
 </body>
 </html>
 <?php mysqli_close($link); ?>
+
