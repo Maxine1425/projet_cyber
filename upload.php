@@ -114,7 +114,7 @@ if (isset($_POST["nom_article"])) {
             echo "Erreur lors du téléchargement du fichier ZIP.";
             exit();
         }
-
+     }
     // Rediriger vers la page du blog après l'ajout
     header("Location: blog.php");
     exit();
