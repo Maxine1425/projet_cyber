@@ -3,7 +3,7 @@ require 'config.php';
 EstConnecte();
 
 $id_compte = $_SESSION['user_id']; // ID du compte de l'utilisateur connecté
-$taille_max = 50000; // Taille max du fichier image en octets
+$taille_max = 500000; // Taille max du fichier image en octets
 $types_valides = ['image/jpeg', 'image/png', 'image/gif']; // Types de fichiers acceptés pour les images
 
 if (isset($_POST["nom_article"])) {
@@ -60,6 +60,12 @@ if (isset($_POST["nom_article"])) {
     if (isset($_FILES['pdf']) && $_FILES['pdf']['error'] === UPLOAD_ERR_OK) {
         $pdfTmpPath = $_FILES['pdf']['tmp_name'];
         $pdfType = $_FILES['pdf']['type'];
+        $pdfsize = $_FILES['pdf']['size'];
+
+        if ($pdfsize > $taille_max) {
+            echo "Fichier trop volumineux";
+            exit();
+        }
 
         // Vérifier que le fichier est un PDF
         if ($pdfType === 'application/pdf') {
