@@ -36,6 +36,7 @@ $result = mysqli_query($link, $sql);
 
                 // Vérification et récupération du PDF
                 $pdfContent = $article['pdf']; // Contenu du PDF stocké en BLOB
+                
         ?>
         <div class="article">
             <div class="left">
@@ -54,7 +55,7 @@ $result = mysqli_query($link, $sql);
                     <h3>Lire le PDF :</h3>
                     <?php
                         // Créer un fichier temporaire pour afficher le PDF
-                        $tempPdfPath = 'tempfile_' . $article['id_article'] . '.pdf';
+                        $tempPdfPath = '/var/www/html/pdfs/tempfile_' . $article['id_article'] . '.pdf';
                         file_put_contents($tempPdfPath, $pdfContent);
                     ?>
                     <embed src="<?php echo $tempPdfPath; ?>" type="application/pdf" width="100%" height="600px" />
