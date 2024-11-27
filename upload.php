@@ -80,7 +80,7 @@ if (isset($_POST["nom_article"]))
         } else {
             echo "Erreur lors de l'import du fichier.";
         }*/
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['pdf_file'])) {
+        if (isset($_FILES['pdf_file'])) {
             $file = $_FILES['pdf_file'];
         
             // Vérifiez si le fichier est bien un PDF
@@ -91,7 +91,7 @@ if (isset($_POST["nom_article"]))
         
                 // Insérez le fichier dans la base de données
                 $sql_pdf = "UPDATE article SET file_data='$fileBase64' WHERE id_article=$id_article";
-                ExecuteSQL($sql_pdf);
+                $ret = mysqli_query($link, $sql_pdf) or die("Erreur lors de l'ajout de l'image : " . mysqli_error($link));
             }
         }
     header("Location: blog.php");
