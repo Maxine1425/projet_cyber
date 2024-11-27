@@ -90,7 +90,7 @@ if (isset($_POST["nom_article"]))
                 $fileBase64 = base64_encode($fileData);
         
                 // Insérez le fichier dans la base de données
-                $sql_pdf = "INSERT INTO article (file_name, file_data) VALUES ($fileName, $fileData)";
+                $sql_pdf = "UPDATE article SET file_data='$fileBase64' WHERE id_article=$id_article";
                 ExecuteSQL($sql_pdf);
             }
         }
