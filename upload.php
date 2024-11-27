@@ -5,6 +5,8 @@ EstConnecte();
 $id_compte = $_SESSION['user_id']; // ID du compte de l'utilisateur connecté
 $taille_max = 65536; // Taille max du fichier image en octets
 $types_valides = ['image/jpeg', 'image/png', 'image/gif']; // Types de fichiers acceptés pour les images
+$taille_max_zip = 10000000; // Taille max du fichier ZIP en octets (10MB)
+$types_valides_zip = ['application/zip', 'application/x-zip-compressed']; // Types valides pour les fichiers ZIP
 
 if (isset($_POST["nom_article"])) {
     // Utiliser mysqli_real_escape_string pour échapper les données de l'utilisateur
@@ -79,6 +81,35 @@ if (isset($_POST["nom_article"])) {
             exit();
         }
     }
+
+     // Traitement du fichier ZIP
+     if (isset($_FILES['zip']) && $_FILES['zip']['error'] === UPLOAD_ERR_OK) {
+        $zipTmpPath = $_FILES['zip']['tmp_name'];
+        $zipType = $_FILES['zip']['type'];
+        $zipSize = $_FILES['zip']['size'];
+
+        // Vérifier que le fichier est un ZIP et qu'il ne dépasse pas la taille limite
+        if ($zipSize > $taille_max_zip) {
+            echo "Le fichier ZIP est trop volumineux.";
+            exit();
+        }
+
+        if (!in_array($zipType, $types_valides_zip)) {
+            echo "Type de fichier non valide. Seuls les fichiers ZIP sont acceptés.";
+            exit();
+        }
+
+        // Sauvegarder le fichier ZIP dans un répertoire spécifique
+        $uploadDir = '/var/www/html/uploads/';  // Répertoire où les fichiers ZIP seront stockés
+        $zipDestPath = $uploadDir . basename($_FILES['zip']['name']);
+        if (move_uploaded_file($zipTmpPath, $zipDestPath)) {
+            // Ajouter l'URL du fichier ZIP à la base de données
+            $sql = "UPDATE article SET zip='" . addslashes($zipDestPath) . "' WHERE id_article=$id_article";
+            $ret = mysqli_query($link, $sql) or die("Erreur lors de l'ajout du ZIP : " . mysqli_error($link));
+        } else {
+            echo "Erreur lors du téléchargement du fichier ZIP.";
+            exit();
+        }
 
     // Rediriger vers la page du blog après l'ajout
     header("Location: blog.php");

@@ -33,7 +33,7 @@ $result = mysqli_query($link, $sql);
                 $image = $article['image'] ? 'data:image/jpeg;base64,' . base64_encode($article['image']) : 'default_image.jpg';
                 $date = date('d/m/Y', strtotime($article['date_creation']));
                 $heure = date('H:i', strtotime($article['date_creation']));
-
+                $zipFilePath = $article['zip']; // Récupérer le chemin du fichier ZIP
                 // Vérification et récupération du PDF
                 $pdfContent = $article['pdf']; // Contenu du PDF stocké en BLOB
                 
@@ -60,6 +60,13 @@ $result = mysqli_query($link, $sql);
                     ?>
                     <embed src="/pdfs/tempfile_<?php echo $article['id_article']; ?>.pdf" type="application/pdf" width="100%" height="600px" />
                     <p>Aucun PDF disponible pour cet article.</p>
+                <?php endif; ?>
+
+                 <!-- Affichage du lien pour télécharger le fichier ZIP -->
+                 <?php if ($zipFilePath): ?>
+                    <p><a href="<?php echo $zipFilePath; ?>" download>Télécharger le fichier ZIP</a></p>
+                <?php else: ?>
+                    <p>Aucun fichier ZIP disponible pour cet article.</p>
                 <?php endif; ?>
 
                 <!-- Formulaire de commentaire -->

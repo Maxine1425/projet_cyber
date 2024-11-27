@@ -32,6 +32,8 @@
     <label for="file">Choisissez un fichier PDF :</label>
     <input type="file" name="pdf">
     </br>
+    <label for="zip">Fichier ZIP (facultatif) :</label>
+    <input type="file" name="zip" accept=".zip"><br>
     <input type="submit" value="Valider">
     </form>
     <br>
