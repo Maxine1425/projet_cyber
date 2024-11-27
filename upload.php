@@ -50,36 +50,12 @@ if (isset($_POST["nom_article"]))
     }
 
     // Mise à jour de l'image si elle est fournie et respecte les critères
-    if (is_uploaded_file($_FILES['image']['tmp_name'])) {
+    /*if (is_uploaded_file($_FILES['image']['tmp_name'])) {
         $img_blob = file_get_contents($_FILES['image']['tmp_name']);
         $sql = "UPDATE article SET image='" . addslashes($img_blob) . "' WHERE id_article=$id_article";
         $ret = mysqli_query($link, $sql) or die("Erreur lors de l'ajout de l'image : " . mysqli_error($link));
     }
-    /*if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
-            $fileName = $_FILES['file']['name'];
-            $fileTmpPath = $_FILES['file']['tmp_name'];
-            $fileType = $_FILES['file']['type'];
-
-            // Vérifier que le fichier est un PDF
-            if ($fileType === 'application/pdf') {
-                $fileContent = file_get_contents($fileTmpPath);
-
-                // Préparer la requête
-                $sql = "UPDATE article SET pdf='" . addslashes($fileContent) . "' WHERE id_article=$id_article";
-                $ret = mysqli_query($link, $sql) or die("Erreur lors de l'ajout du pdf: " . mysqli_error($link));}}}
-                
-               if (ExecuteSQL($sql)) {
-                    echo "Fichier téléchargé et enregistré avec succès !";
-                } else {
-                    echo "Erreur lors de l'enregistrement du fichier : " . $sql->error;
-                }
-
-            } else {
-                echo "Veuillez importer uniquement des fichiers PDF.";
-            }
-        } else {
-            echo "Erreur lors de l'import du fichier.";
-        }*/
+ 
         if (isset($_FILES['pdf_file'])) {
             $file = $_FILES['pdf_file'];
         
@@ -90,10 +66,28 @@ if (isset($_POST["nom_article"]))
                 $fileBase64 = base64_encode($fileData);
         
                 // Insérez le fichier dans la base de données
-                $sql_pdf = "UPDATE article SET file_data='$fileBase64' WHERE id_article=$id_article";
-                $ret = mysqli_query($link, $sql_pdf) or die("Erreur lors de l'ajout de l'image : " . mysqli_error($link));
+                $sql_pdf = "UPDATE article SET file_data=$fileBase64 WHERE id_article=$id_article";
+                $ret2 = mysqli_query($link, $sql_pdf) or die("Erreur lors de l'ajout du pdf : " . mysqli_error($link));
             }
-        }
+        }*/
+        if (isset($_FILES['pdf_file']) && is_uploaded_file($_FILES['pdf_file']['tmp_name'])) {
+            $file = $_FILES['pdf_file'];
+    
+            // Vérifiez si le fichier est bien un PDF
+            if ($file['type'] === 'application/pdf') {
+                $fileData = file_get_contents($file['tmp_name']);
+                $fileBase64 = base64_encode($fileData);
+    
+                // Mise à jour de l'article avec les données du PDF
+                $sql_pdf = "UPDATE article SET file_data='$fileBase64' WHERE id_article=$id_article";
+                $ret2 = mysqli_query($link, $sql_pdf);
+                if (!$ret2) {
+                    die("Erreur lors de l'ajout du PDF : " . mysqli_error($link));
+                }
+            } else {
+                echo "Le fichier fourni n'est pas un PDF valide.";
+                exit();
+            }
     header("Location: blog.php");
   //  exit();
     }
