@@ -5,34 +5,7 @@ EstConnecte();
 // Récupérer tous les articles de la base de données
 $sql = "SELECT * FROM article ORDER BY date_creation DESC";
 $result = mysqli_query($link, $sql);
-
-/*$pdf = "SELECT id_pdf, name FROM pdf";
-$result2 = mysqli_query($link, $pdf);*/
 ?>
-
-<?php
-
-/*if (isset($_GET['id_article'])) {
-    $id = intval($_GET['id_article']);
-
-    // Récupérer le fichier
-    $sql_pdf = prepare("SELECT pdf FROM article WHERE id_article = ?");
-    mysqli_bind_param($sql_pdf,"i", $id);
-    GetSQLValue($sql_pdf);
-    mysqli_bind_result($sql_pdf);
-    mysqli_fetch($sql_pdf);
-
-    if ($file) {
-        // Envoyer les en-têtes pour télécharger le fichier
-        header('Content-Type: application/pdf');
-        //header('Content-Disposition: attachment; filename="' . $name . '"');
-        echo $sql_pdf;
-    } else {
-        echo "Fichier non trouvé.";
-    }
-}*/
-?>
-
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -60,9 +33,12 @@ $result2 = mysqli_query($link, $pdf);*/
                 $image = $article['image'] ? 'data:image/jpeg;base64,' . base64_encode($article['image']) : 'default_image.jpg';
                 $date = date('d/m/Y', strtotime($article['date_creation']));
                 $heure = date('H:i', strtotime($article['date_creation']));
+
+                // Vérification et récupération du PDF
+                $pdfContent = $article['pdf']; // Contenu du PDF stocké en BLOB
         ?>
         <div class="article">
-        <div class="left">
+            <div class="left">
                 <?php if (!empty($article['image'])): ?>
                     <img src="data:image/jpeg;base64,<?php echo base64_encode($article['image']); ?>" alt="Image de l'article">
                 <?php endif; ?>
@@ -72,6 +48,19 @@ $result2 = mysqli_query($link, $pdf);*/
                 <h1><?php echo htmlspecialchars($article['nom_article']); ?></h1>
                 <p class="description"><?php echo htmlspecialchars($article['contenu']); ?></p>
                 <p class="auteur">Par : <?php echo htmlspecialchars($article['auteur']); ?></p>
+
+                <!-- Affichage du PDF dans un lecteur intégré -->
+                <?php if ($pdfContent): ?>
+                    <h3>Lire le PDF :</h3>
+                    <?php
+                        // Créer un fichier temporaire pour afficher le PDF
+                        $tempPdfPath = 'tempfile_' . $article['id_article'] . '.pdf';
+                        file_put_contents($tempPdfPath, $pdfContent);
+                    ?>
+                    <embed src="<?php echo $tempPdfPath; ?>" type="application/pdf" width="100%" height="600px" />
+                <?php else: ?>
+                    <p>Aucun PDF disponible pour cet article.</p>
+                <?php endif; ?>
 
                 <!-- Formulaire de commentaire -->
                 <form action="ajouter_commentaire.php" method="POST">

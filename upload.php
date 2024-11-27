@@ -3,17 +3,17 @@ require 'config.php';
 EstConnecte();
 
 $id_compte = $_SESSION['user_id']; // ID du compte de l'utilisateur connecté
-$taille_max = 50000;
-$types_valides = ['image/jpeg', 'image/png', 'image/gif']; // Types de fichiers acceptés
+$taille_max = 50000; // Taille max du fichier image en octets
+$types_valides = ['image/jpeg', 'image/png', 'image/gif']; // Types de fichiers acceptés pour les images
 
-if (isset($_POST["nom_article"])) 
-{
-    $nom_article = QuoteStr($_POST["nom_article"]);
-    $contenu = QuoteStr($_POST["contenu"]);
+if (isset($_POST["nom_article"])) {
+    // Utiliser mysqli_real_escape_string pour échapper les données de l'utilisateur
+    $nom_article = mysqli_real_escape_string($link, $_POST["nom_article"]);
+    $contenu = mysqli_real_escape_string($link, $_POST["contenu"]);
     $auteur = GetSQLValue("SELECT pseudo FROM compte WHERE id_compte = $id_compte");
-    $same_nom_article = GetSQLValue("SELECT COUNT(*) FROM article WHERE nom_article = $nom_article");
+    $same_nom_article = GetSQLValue("SELECT COUNT(*) FROM article WHERE nom_article = '$nom_article'");
 
-    // Vérifier si le titre est déjà utilisé
+    // Vérification si le titre est déjà utilisé
     if ($same_nom_article != 0) {
         echo "Titre déjà utilisé";
         exit();
@@ -36,7 +36,7 @@ if (isset($_POST["nom_article"]))
     }
 
     // Insertion de l'article avec compte_id
-    $sql = "INSERT INTO article (compte_id, auteur, nom_article, contenu) VALUES ($id_compte, '$auteur', $nom_article, $contenu)";
+    $sql = "INSERT INTO article (compte_id, auteur, nom_article, contenu) VALUES ($id_compte, '$auteur', '$nom_article', '$contenu')";
     $insert_result = mysqli_query($link, $sql);
 
     if (!$insert_result) {
@@ -55,54 +55,27 @@ if (isset($_POST["nom_article"]))
         $sql = "UPDATE article SET image='" . addslashes($img_blob) . "' WHERE id_article=$id_article";
         $ret = mysqli_query($link, $sql) or die("Erreur lors de l'ajout de l'image : " . mysqli_error($link));
     }
-    if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
-            $fileName = $_FILES['file']['name'];
-            $fileTmpPath = $_FILES['file']['tmp_name'];
-            $fileType = $_FILES['file']['type'];
 
-            // Vérifier que le fichier est un PDF
-            if ($fileType === 'application/pdf') {
-                $fileContent = file_get_contents($fileTmpPath);
+    // Traitement du fichier PDF
+    if (isset($_FILES['pdf']) && $_FILES['pdf']['error'] === UPLOAD_ERR_OK) {
+        $pdfTmpPath = $_FILES['pdf']['tmp_name'];
+        $pdfType = $_FILES['pdf']['type'];
 
-                // Préparer la requête
-                $sql = "UPDATE article SET pdf='" . addslashes($fileContent) . "' WHERE id_article=$id_article";
-                $ret = mysqli_query($link, $sql) or die("Erreur lors de l'ajout du pdf: " . mysqli_error($link));}}}
-                
-              /*  if (ExecuteSQL($sql)) {
-                    echo "Fichier téléchargé et enregistré avec succès !";
-                } else {
-                    echo "Erreur lors de l'enregistrement du fichier : " . $sql->error;
-                }
+        // Vérifier que le fichier est un PDF
+        if ($pdfType === 'application/pdf') {
+            $pdfContent = file_get_contents($pdfTmpPath);
 
-            } else {
-                echo "Veuillez importer uniquement des fichiers PDF.";
-            }
+            // Préparer la requête pour insérer le PDF dans la base de données
+            $sql = "UPDATE article SET pdf='" . addslashes($pdfContent) . "' WHERE id_article=$id_article";
+            $ret = mysqli_query($link, $sql) or die("Erreur lors de l'ajout du pdf : " . mysqli_error($link));
         } else {
-            echo "Erreur lors de l'import du fichier.";
-        }*/
+            echo "Erreur : Veuillez importer uniquement des fichiers PDF.";
+            exit();
+        }
+    }
+
+    // Rediriger vers la page du blog après l'ajout
     header("Location: blog.php");
-  //  exit();
-
+    exit();
+}
 ?>
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Création d'article</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <nav>
-        <h1>Articles</h1>
-        <div class="onglets">
-            <a href="blog.php">Home</a>
-            <a href="creer_article.php">Créer un article</a>
-            <a href="logout.php">Déconnexion</a>
-        </div>
-    </nav>
-</body>
-</html>
-<?php mysqli_close($link); ?>

@@ -1,18 +1,11 @@
 <?php
 session_start();
-//require 'vendor/autoload.php'; // Charger les dépendances installées via Composer
 
-/*
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__); // Créer une instance Dotenv
-$dotenv->load(); // Charger les variables du fichier .env
-*/
-
-//changer les info de co, essayer de pas mettre en claire le mdp 
 $host='localhost';
-$user = $_SERVER['USER_NAME'];
-$password = $_SERVER['MDP_BDD'];
-//$user = getenv('USER_NAME');
-//$password = getenv('MDP_BDD');
+//$user = $_SERVER['USER_NAME'];
+//$password = $_SERVER['MDP_BDD'];
+$user = "maco";
+$password = "l'ec'efmtnc'ePD33";
 $base = "projet_cybermaco";
 
 $link = connexion_MySQLi_procedural($host,$user,$password,$base);
