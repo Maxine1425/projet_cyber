@@ -64,7 +64,7 @@ $result = mysqli_query($link, $sql);
 
                  <!-- Affichage du lien pour télécharger le fichier ZIP -->
                  <?php if ($zipFilePath): ?>
-                    <p><a href="<?php echo $zipFilePath; ?>" download>Télécharger le fichier ZIP</a></p>
+                    <p><a href="/uploads/<?php echo basename($article['zip']); ?>" download>Télécharger le fichier ZIP</a></p>
                 <?php else: ?>
                     <p>Aucun fichier ZIP disponible pour cet article.</p>
                 <?php endif; ?>
